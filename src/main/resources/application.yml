@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: featherlog
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/featherlog}
+    username: ${DB_USER:featherlog}
+    password: ${DB_PASSWORD:featherlog}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+featherlog:
+  jwt:
+    # Must be at least 32 bytes. Override in any real deployment.
+    secret: ${JWT_SECRET:dev-only-secret-change-me-please-0123456789}
+    ttl: PT12H
+  reminders:
+    cron: "0 */15 * * * *"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
